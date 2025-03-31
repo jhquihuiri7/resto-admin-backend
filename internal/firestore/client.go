@@ -60,3 +60,22 @@ func DeleteId(id string) error {
 	}
 	return nil
 }
+func DeleteUser(id string) error {
+	user, err := config.AuthClient.GetUserByEmail(context.Background(),id)
+	if err != nil {
+		log.Fatalf("could not delete auth user: %v", err)
+		return err
+	}
+	err = config.AuthClient.DeleteUser(context.Background(),user.UID)
+	if err != nil {
+		log.Fatalf("could not delete auth user: %v", err)
+		return err
+	}
+	collectionName := "users"
+	_, err = config.FirestoreClient.Collection(collectionName).Doc(id).Delete(context.Background())
+	if err != nil {
+		log.Fatalf("could not delete user info: %v", err)
+		return err
+	}
+	return nil
+}

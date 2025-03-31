@@ -20,7 +20,7 @@ var (
 
 func InitFirebase() {
 	once.Do(func() {
-		opt := option.WithCredentialsFile("./resto-admin-backend-d3252-firebase-adminsdk-fbsvc-722fcbd527.json")
+		opt := option.WithCredentialsFile("./resto-admin-backend-d3252-firebase-adminsdk-fbsvc-8f853fb34f.json")
 		app, err := firebase.NewApp(context.Background(), nil, opt)
 		if err != nil {
 			fmt.Printf("error initializing app: %v", err)

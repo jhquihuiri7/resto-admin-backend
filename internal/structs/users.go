@@ -10,6 +10,10 @@ type User struct {
 	Password string `json:"password"`
 }
 
+func (u User) DeleteUser()error{
+   return firestore.DeleteUser(u.Email)
+}
+
 type UserInfo struct {
 	Id                        string    `json:"id" firestore:"id"`
 	Company                   string    `json:"company" firestore:"company"`
