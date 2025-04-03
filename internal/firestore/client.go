@@ -79,3 +79,11 @@ func DeleteUser(id string) error {
 	}
 	return nil
 }
+func ValidateToken (token string)error{
+    _, err := config.AuthClient.VerifyIDToken(context.Background(), token)
+	if err != nil {
+		log.Fatalf("could not validate token: %v", err)
+		return err
+	}
+	return nil
+}
