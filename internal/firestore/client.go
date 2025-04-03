@@ -1,10 +1,11 @@
 package firestore
 
 import (
-	"cloud.google.com/go/firestore"
 	"context"
 	"log"
 	"resto-admin-backend/config"
+
+	"cloud.google.com/go/firestore"
 )
 
 func GetUsers() ([]map[string]interface{}, error) {
@@ -22,7 +23,9 @@ func GetUsers() ([]map[string]interface{}, error) {
 			log.Fatalf("could not get user info: %v", err)
 			return nil, err
 		}
-		list_data = append(list_data, doc.Data())
+		data :=  doc.Data()
+		data["id"] = doc.Ref.ID
+		list_data = append(list_data, data)
 	}
 
 	return list_data, err
@@ -33,6 +36,8 @@ func GetUser(id string) (map[string]interface{}, error) {
 		log.Fatalf("could not get user info: %v", err)
 		return nil, err
 	}
+	data := doc.Data()
+	data["id"] = doc.Ref.ID
 	return doc.Data(), nil
 }
 
