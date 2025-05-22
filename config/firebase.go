@@ -16,6 +16,7 @@ var (
 	AuthClient      *auth.Client
 	FirestoreClient *firestore.Client
 	once            sync.Once
+	
 )
 
 func InitFirebase() {

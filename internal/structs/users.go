@@ -24,6 +24,10 @@ type UserInfo struct {
 }
 
 func (u UserInfo) CreateUserInfo() error {
+	fmt.Println(u.RestaurantId)
+	if u.Role == "system" {
+		u.RestaurantId = ""
+	}
 	return firestore.CreateUserInfo(u, u.Id)
 }
 func (u UserInfo) DeleteId() error {

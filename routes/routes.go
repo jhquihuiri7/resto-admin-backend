@@ -18,6 +18,14 @@ func SetupRoutes(router *gin.Engine) {
 
 		ctx.JSON(200, gin.H{"message": "Success"})
 	})
+	usersGroup := router.Group("/users")
+	//{
+	//	tetsGroup.GET("/test", func(ctx *gin.Context) {
+			//suprabase.GetUser(2)
+	//	})
+	//}
+	user_routes(usersGroup)
+
 	authGroup := router.Group("/auth")
 	restaurantGroup := router.Group("/restaurant")
 	authGroup.Use(middlewares.FirebaseAuthMiddleware())
@@ -25,6 +33,7 @@ func SetupRoutes(router *gin.Engine) {
 		authGroup.GET("/getUser", func(ctx *gin.Context) {
 			var userInfo structs.UserInfo
 			id := ctx.Query("id")
+			
 
 			data, err := firestore.GetUser(id)
 			if err != nil {

@@ -11,6 +11,8 @@ import (
 func main() {
 
 	config.InitFirebase()
+	config.Connectdb()
+	defer config.Conn.Close()
 	router := gin.Default()
 	router.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"*"}, // Origen permitido
@@ -24,5 +26,5 @@ func main() {
 	routes.SetupRoutes(router)
 
 	// Iniciar el servidor en el puerto 8080
-	router.Run(":8081")
+	router.Run(":8080")
 }
